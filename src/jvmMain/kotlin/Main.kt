@@ -21,7 +21,7 @@ import com.enhe.sql.DBProduct
 
 // 默认窗口尺寸
 val WINDOW_HEIGHT = 1200.dp
-val WINDOW_WIDTH = 850.dp
+val WINDOW_WIDTH = 900.dp
 
 @Composable
 @Preview

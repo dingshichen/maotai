@@ -35,7 +35,7 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
-            includeAllModules = true
+            modules("java.sql")
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "Maotai"
             packageVersion = "1.0.0"
