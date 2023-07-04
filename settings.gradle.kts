@@ -13,4 +13,5 @@ pluginManagement {
 }
 
 rootProject.name = "maotai"
-
+include("desktop")
+include("core")
