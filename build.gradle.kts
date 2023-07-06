@@ -1,6 +1,6 @@
 allprojects {
     group = "com.enhe"
-    version = "1.1"
+    version = "1.1.0"
 
     repositories {
         mavenLocal()

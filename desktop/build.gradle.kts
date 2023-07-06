@@ -28,7 +28,7 @@ compose.desktop {
             modules("java.sql")
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "Maotai"
-            packageVersion = "1.0.0"
+            packageVersion = version.toString()
         }
     }
 }
