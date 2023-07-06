@@ -13,6 +13,8 @@
 ### 1.4 如果需要预览 `compose` 组件，可以安装 IDEA [compose](https://plugins.jetbrains.com/plugin/index?xmlId=org.jetbrains.compose.desktop.ide&utm_source=product&utm_medium=link&utm_campaign=IU&utm_content=2023.1) 插件
 ![compose](image/compose_plugin.png)
 
+### 1.5 打包运行 `gradle packageDistributionForCurrentOS`
+
 ## 2 模块
 - `core` SQL 处理的核心逻辑
 - `desktop` 客户端界面
