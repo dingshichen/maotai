@@ -14,26 +14,30 @@ public abstract class RuleWrapperUtil {
 
     public static String getWrapperName(String name, DBProduct product) {
         switch (product) {
-            case MySQL:
+            case MySQL -> {
                 if (Arrays.stream(MySqlLexer.ruleNames).anyMatch(e -> e.equalsIgnoreCase(name))) {
                     return String.format("`%s`", name);
                 } else {
                     return name;
                 }
-            case DM8:
+            }
+            case DM8 -> {
                 if (Arrays.stream(PlSqlLexer.ruleNames).anyMatch(e -> e.equalsIgnoreCase(name))) {
                     return String.format("\"%s\"", name.toUpperCase());
                 } else {
                     return name;
                 }
-            case GaussDB:
+            }
+            case GaussDB -> {
                 if (Arrays.stream(PostgreSQLLexer.ruleNames).anyMatch(e -> e.equalsIgnoreCase(name))) {
-                    return String.format("\"%s\"", name.toUpperCase());
+                    return String.format("\"%s\"", name.toLowerCase());
                 } else {
                     return name;
                 }
-            default:
+            }
+            default -> {
                 return name;
+            }
         }
     }
 
