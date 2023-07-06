@@ -3,6 +3,8 @@ package com.enhe.sql.generate;
 import com.enhe.sql.lang.RuleWrapperUtil;
 import com.enhe.sql.model.*;
 import com.enhe.sql.model.impl.DDLScript;
+import com.enhe.sql.model.impl.DefaultExpression;
+import com.enhe.sql.model.impl.DefaultNullExpression;
 import com.enhe.sql.type.ITypeMapping;
 import com.enhe.sql.type.TypeMappingManager;
 
@@ -26,7 +28,7 @@ public class DM8Generator implements SQLGenerator {
 
     private static final String CREATE_TABLE_COLUMN_TEMP = "    %s %s %s %s";
 
-    private static final String CREATE_TABLE_PK_TEMP = "    cluster primary key (%s)";
+    private static final String CREATE_TABLE_PK_TEMP = "    primary key (%s)";
 
     private static final String TABLE_COMMENT_TEMP = "comment on table %s is '%s';";
 
@@ -171,6 +173,9 @@ public class DM8Generator implements SQLGenerator {
             case TIMESTAMP_WITH_TIMEZONE:
                 return "";
             default:
+                if (defaultExpression instanceof DefaultNullExpression) {
+                    return "";
+                }
                 return "default " + defaultExpression.getText();
         }
     }

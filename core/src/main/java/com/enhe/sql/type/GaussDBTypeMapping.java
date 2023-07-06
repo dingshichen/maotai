@@ -43,8 +43,9 @@ public class GaussDBTypeMapping implements ITypeMapping {
                 return "json";
             case CHAR:
                 return "char" + dataType.getLengthPrecision();
-            case VARCHAR:
             case LONGVARCHAR:
+                return "text";
+            case VARCHAR:
             case BINARY:
             case VARBINARY:
             case LONGVARBINARY:

@@ -46,11 +46,12 @@ public class DM8TypeMapping implements ITypeMapping {
             case TIMESTAMP_WITH_TIMEZONE:
                 return "datetime";
             case JAVA_OBJECT:
-                return "json";
+                return "clob";
             case CHAR:
                 return "char" + dataType.getLengthPrecision();
-            case VARCHAR:
             case LONGVARCHAR:
+                return "text";
+            case VARCHAR:
             case BINARY:
             case VARBINARY:
             case LONGVARBINARY:

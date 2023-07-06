@@ -10,6 +10,7 @@ import com.enhe.sql.model.IIndex;
 import com.enhe.sql.model.impl.*;
 import com.enhe.sql.type.ITypeMapping;
 import com.enhe.sql.type.TypeMappingManager;
+import com.enhe.sql.util.DefaultExpressionUtil;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -62,7 +63,7 @@ public class MySqlCreateColumnParserVisitor extends MySqlParserBaseVisitor<Colum
         // 字段注释
         String columnComment = null;
         // 是否可空
-        boolean isNullable = false;
+        boolean isNullable = true;
         // 默认值
         IExpression defaultExpression = null;
         for (MySqlParser.ColumnConstraintContext columnConstraint : ctx.columnDefinition().columnConstraint()) {
@@ -72,10 +73,7 @@ public class MySqlCreateColumnParserVisitor extends MySqlParserBaseVisitor<Colum
                 columnComment = columnConstraint.stop.getText().substring(1, columnConstraint.stop.getText().length() - 1);
             } else if (columnConstraint instanceof MySqlParser.DefaultColumnConstraintContext) {
                 MySqlParser.DefaultValueContext defaultValue = ((MySqlParser.DefaultColumnConstraintContext) columnConstraint).defaultValue();
-                defaultExpression = new DefaultExpression(defaultValue.getText());
-                if ("null".equalsIgnoreCase(defaultValue.getText()) ) {
-                    isNullable = true;
-                }
+                defaultExpression = DefaultExpressionUtil.of(defaultValue.getText());
             } else if (columnConstraint instanceof MySqlParser.NullColumnConstraintContext) {
                 isNullable = ((MySqlParser.NullColumnConstraintContext) columnConstraint).nullNotnull().children.size() != 2;
             }

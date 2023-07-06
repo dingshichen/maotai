@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.enhe.sql.lang.RuleWrapperUtil;
 import com.enhe.sql.model.*;
 import com.enhe.sql.model.impl.DDLScript;
+import com.enhe.sql.model.impl.DefaultNullExpression;
 import com.enhe.sql.type.ITypeMapping;
 import com.enhe.sql.type.TypeMappingManager;
 
@@ -188,6 +189,9 @@ public class GaussDBGenerator implements SQLGenerator {
             case TIMESTAMP_WITH_TIMEZONE:
                 return "";
             default:
+                if (defaultExpression instanceof DefaultNullExpression) {
+                    return "";
+                }
                 return "default " + defaultExpression.getText();
         }
     }
