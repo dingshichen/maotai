@@ -1,6 +1,8 @@
+fun properties(key: String) = project.findProperty(key).toString()
+
 allprojects {
-    group = "com.enhe"
-    version = "1.1.0"
+    group = properties("app.group")
+    version = properties("app.version")
 
     repositories {
         mavenLocal()

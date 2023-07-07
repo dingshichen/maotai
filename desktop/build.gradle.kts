@@ -1,5 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
+fun properties(key: String) = project.findProperty(key).toString()
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
@@ -27,8 +29,15 @@ compose.desktop {
         nativeDistributions {
             modules("java.sql")
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "Maotai"
+            packageName = properties("app.name")
             packageVersion = version.toString()
         }
+    }
+}
+
+tasks {
+    withType<ProcessResources> {
+        from("${project.rootDir}/gradle.properties")
+        into("${project.projectDir}/src/jvmMain/resources")
     }
 }
