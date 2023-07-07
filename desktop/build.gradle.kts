@@ -31,13 +31,14 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = properties("app.name")
             packageVersion = version.toString()
+            vendor = properties("vendor.name")
         }
     }
 }
 
-tasks {
-    withType<ProcessResources> {
-        from("${project.rootDir}/gradle.properties")
-        into("${project.projectDir}/src/jvmMain/resources")
-    }
-}
+//tasks {
+//    withType<ProcessResources> {
+//        from("${project.rootDir}/gradle.properties")
+//        into("${project.projectDir}/src/jvmMain/resources")
+//    }
+//}

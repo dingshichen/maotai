@@ -15,7 +15,6 @@ import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import com.enhe.maotai.compose.LongTextField
 import com.enhe.maotai.compose.TransButton
-import com.enhe.maotai.config.AppProperties
 import com.enhe.maotai.service.feature
 import com.enhe.maotai.service.trans
 import com.enhe.sql.DBProduct
@@ -56,18 +55,15 @@ fun App() {
     }
 }
 
-fun main() {
-    AppProperties.init()
-    return application {
-        Window(
-            onCloseRequest = ::exitApplication,
-            state = WindowState(
-                position = WindowPosition.Aligned(Alignment.Center),
-                size = DpSize(WINDOW_HEIGHT, WINDOW_WIDTH)
-            ),
-            title = "${AppProperties.getProperty("app.name")} v${AppProperties.getProperty("app.version")}"
-        ) {
-            App()
-        }
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = WindowState(
+            position = WindowPosition.Aligned(Alignment.Center),
+            size = DpSize(WINDOW_HEIGHT, WINDOW_WIDTH)
+        ),
+        title = "Maotai"
+    ) {
+        App()
     }
 }
