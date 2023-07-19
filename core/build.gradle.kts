@@ -1,5 +1,8 @@
+fun properties(key: String) = project.findProperty(key).toString()
+
 plugins {
     `java-library`
+    `maven-publish`
 }
 
 java {
@@ -18,5 +21,16 @@ dependencies {
 
 tasks.test {
     useJUnit()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = properties("app.group")
+            artifactId = "core"
+            version = properties("app.version")
+            from(components["java"])
+        }
+    }
 }
 
