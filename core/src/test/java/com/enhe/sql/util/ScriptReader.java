@@ -12,7 +12,7 @@ public abstract class ScriptReader {
 
     public static String read(String path) {
         try {
-            return Files.readString(Path.of(URI.create("file:/Users/dingshichen/IdeaProjects/enhe/sql-parser/src/test/resources" + path)));
+            return Files.readString(Path.of(URI.create("file:/Users/dingshichen/IdeaProjects/kotlin/maotai/core/src/test/resources" + path)));
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

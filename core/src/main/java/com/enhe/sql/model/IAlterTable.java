@@ -19,4 +19,6 @@ public interface IAlterTable extends Ordered {
     @Nullable List<IIndex> getAddIndex();
 
     @Nullable List<IName> getDropIndex();
+
+    @Nullable String getRename();
 }

@@ -79,5 +79,12 @@ public class MySQLTransferTest {
         PrintUtil.println(script);
     }
 
+    @Test
+    public void rename() {
+        SQLTransfer transfer = new MySQLTransfer();
+        String sql = ScriptReader.read("/MySQL/rename.sql");
+        IScript script = transfer.transform(sql, DBProduct.DM8);
+        PrintUtil.println(script);
+    }
     
 }

@@ -53,6 +53,8 @@ public class GaussDBGenerator implements SQLGenerator {
 
     private static final String DROP_TABLE = "drop table if exists %s;";
 
+    private static final String RENAME = "alter table %s rename to %s;";
+
     @Override
     public IScript toCreateTable(ITable table) {
         ITypeMapping typeMapping = TypeMappingManager.getInstance(GaussDB);
@@ -159,6 +161,9 @@ public class GaussDBGenerator implements SQLGenerator {
             for (IName index : alterTable.getDropIndex()) {
                 script.addText(String.format(DROP_INDEX, index.getText()));
             }
+        }
+        if (alterTable.getRename() != null) {
+            script.addText(String.format(RENAME, alterTable.getTableName(), alterTable.getRename()));
         }
         return script;
     }

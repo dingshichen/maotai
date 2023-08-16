@@ -22,7 +22,7 @@ public class DM8Generator implements SQLGenerator {
 
     private static final String DROP_IF_EXIST_TEMP = "drop table if exists %s cascade;";
 
-    private static final String CREATE_TABLE_TEMP = "create table %s (\n" +
+    private static final String CREATE_TABLE_TEMP = "create table if not exists %s (\n" +
                                                     "%s\n" +
                                                     ");";
 
@@ -48,6 +48,8 @@ public class DM8Generator implements SQLGenerator {
 
     private static final String DROP_TABLE = "drop table if exists %s;";
 
+    private static final String RENAME = "alter table %s rename to %s;";
+
     @Override
     public IScript toCreateTable(ITable table) {
         ITypeMapping typeMapping = TypeMappingManager.getInstance(DM8);
@@ -55,8 +57,6 @@ public class DM8Generator implements SQLGenerator {
         IScript script = new DDLScript();
 
         String tableName = RuleWrapperUtil.getWrapperName(table.getName(), DM8);
-
-        script.addText(String.format(DROP_IF_EXIST_TEMP, tableName));
 
         String columnsText = table.getColumns().stream()
                 .map(e -> String.format(CREATE_TABLE_COLUMN_TEMP, RuleWrapperUtil.getWrapperName(e.getName(), DM8),
@@ -143,6 +143,9 @@ public class DM8Generator implements SQLGenerator {
             for (IName index : alterTable.getDropIndex()) {
                 script.addText(String.format(DROP_INDEX, index.getText()));
             }
+        }
+        if (alterTable.getRename() != null) {
+            script.addText(String.format(RENAME, tableName, RuleWrapperUtil.getWrapperName(alterTable.getRename(), DM8)));
         }
         return script;
     }

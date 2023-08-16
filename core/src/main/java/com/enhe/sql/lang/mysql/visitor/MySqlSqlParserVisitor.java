@@ -79,6 +79,7 @@ public class MySqlSqlParserVisitor extends MySqlParserBaseVisitor<Object> {
         List<IColumn> modifyColumns = new ArrayList<>();
         List<IIndex> addIndex = new ArrayList<>();
         List<IName> dropIndex = new ArrayList<>();
+        String rename = null;
         for (MySqlParser.AlterSpecificationContext alterSpecificationContext : ctx.alterSpecification()) {
             if (alterSpecificationContext instanceof MySqlParser.AlterByAddColumnContext) {
                 // 新增字段
@@ -98,9 +99,13 @@ public class MySqlSqlParserVisitor extends MySqlParserBaseVisitor<Object> {
             } else if (alterSpecificationContext instanceof MySqlParser.AlterByDropIndexContext) {
                 // 删除索引
                 dropIndex(dropIndex, (MySqlParser.AlterByDropIndexContext) alterSpecificationContext, alterCount);
+            } else if (alterSpecificationContext instanceof MySqlParser.AlterByRenameContext) {
+                // 修改表名
+                MySqlParser.AlterByRenameContext renameContext = (MySqlParser.AlterByRenameContext) alterSpecificationContext;
+                rename = renameContext.getStop().getText();
             }
         }
-        IAlterTable alterTable = new AlterTable(count.getAndIncrement(), RuleWrapperUtil.getMySQLRealName(tableNameContext.getText()), addColumns, dropColumns, modifyColumns, addIndex, dropIndex);
+        IAlterTable alterTable = new AlterTable(count.getAndIncrement(), RuleWrapperUtil.getMySQLRealName(tableNameContext.getText()), addColumns, dropColumns, modifyColumns, addIndex, dropIndex, rename);
         alterTables.add(alterTable);
         return alterTable;
     }

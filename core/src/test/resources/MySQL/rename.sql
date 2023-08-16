@@ -1,0 +1,1 @@
+alter table std_example rename to hehe;

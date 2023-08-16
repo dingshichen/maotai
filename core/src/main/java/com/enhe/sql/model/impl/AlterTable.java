@@ -27,12 +27,15 @@ public class AlterTable implements IAlterTable {
 
     private List<IName> dropIndex;
 
+    private String rename;
+
     public AlterTable(int order, String tableName,
                       @Nullable List<IColumn> column,
                       @Nullable List<IName> dropColumns,
                       @Nullable List<IColumn> modifyColumns,
                       @Nullable List<IIndex> addIndex,
-                      @Nullable List<IName> dropIndex) {
+                      @Nullable List<IName> dropIndex,
+                      @Nullable String rename) {
         this.order = order;
         this.tableName = tableName;
         this.addColumns = column;
@@ -40,6 +43,7 @@ public class AlterTable implements IAlterTable {
         this.modifyColumns = modifyColumns;
         this.addIndex = addIndex;
         this.dropIndex = dropIndex;
+        this.rename = rename;
     }
 
     @Override
@@ -70,6 +74,11 @@ public class AlterTable implements IAlterTable {
     @Override
     public @Nullable List<IName> getDropIndex() {
         return dropIndex;
+    }
+
+    @Override
+    public @Nullable String getRename() {
+        return rename;
     }
 
     @Override
