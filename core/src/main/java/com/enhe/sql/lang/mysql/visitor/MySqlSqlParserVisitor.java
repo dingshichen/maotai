@@ -144,7 +144,7 @@ public class MySqlSqlParserVisitor extends MySqlParserBaseVisitor<Object> {
         // 字段注释
         String columnComment = null;
         // 是否可空
-        boolean isNullable = false;
+        boolean isNullable = true;
         // 默认值
         IExpression defaultExpression = null;
         for (MySqlParser.ColumnConstraintContext columnConstraint : context.columnDefinition().columnConstraint()) {
@@ -188,7 +188,7 @@ public class MySqlSqlParserVisitor extends MySqlParserBaseVisitor<Object> {
         // 字段注释
         String columnComment = null;
         // 是否可空
-        boolean isNullable = false;
+        boolean isNullable = true;
         // 默认值
         IExpression defaultExpression = null;
         for (MySqlParser.ColumnConstraintContext columnConstraint : context.columnDefinition().columnConstraint()) {
