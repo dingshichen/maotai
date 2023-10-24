@@ -81,7 +81,7 @@ public class DM8Generator implements SQLGenerator {
 
         if (table.getIndexGroup() != null) {
             table.getIndexGroup().forEach(e ->
-                    script.addText(String.format(ADD_INDEX_TEMP, e.getName(), tableName,
+                    script.addText(String.format(e.isUnique() ? ADD_UNIQUE_TEMP : ADD_INDEX_TEMP, e.getName(), tableName,
                             e.getColumnNames().stream()
                                     .map(c -> RuleWrapperUtil.getWrapperName(c, DM8))
                                     .collect(Collectors.joining(", ")))
